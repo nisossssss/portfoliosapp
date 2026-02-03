@@ -1,3 +1,4 @@
+import profileImage from '../assets/images/profile.png';
 import { useTheme } from '../contexts/ThemeContext';
 import './FloatingCard.css';
 
@@ -9,7 +10,7 @@ function FloatingCard() {
             <div className="accent-background" style={{ backgroundColor: accentColor }}>
                 <div className="circle" style={{ backgroundColor: backgroundColor }}></div>
             </div>
-            <img src="src/assets/images/profile.png" alt="Laura Argentieri" />
+            <img src={profileImage} alt="Laura Argentieri" />
             <div className="info-bar" style={{ backgroundColor: darkTextColor }}>
                 <h3 style={{ color: lightTextColor }}>Contact</h3>
                 <p style={{ color: lightTextColor }}>
