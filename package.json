@@ -1,8 +1,20 @@
 {
   "name": "portfoliosapp",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
+  "description": "App per la gestione di blog personali.",
+  "homepage": "https://github.com/nisossssss/portfoliosapp#readme",
+  "bugs": {
+    "url": "https://github.com/nisossssss/portfoliosapp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nisossssss/portfoliosapp.git"
+  },
+  "license": "ISC",
+  "author": "Luigi Niso",
   "type": "module",
+  "main": "eslint.config.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
