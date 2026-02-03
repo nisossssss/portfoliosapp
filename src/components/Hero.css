@@ -1,0 +1,80 @@
+.hero-section {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(2rem, 5vw, 10rem);
+  position: relative;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.hero-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-section h1 {
+  line-height: 1.1;
+  font-size: clamp(6rem, 11vw, 11rem);
+  margin-bottom: 1rem;
+}
+
+.hero-section p {
+  margin-top: 1rem;
+  font-size: clamp(1rem, 2.5vw, 1.8rem);
+  font-family: 'Hedvig Letters Serif', serif;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.hero-section .link-content {
+  font-size: clamp(0.9rem, 2vw, 1.4rem);
+  padding: clamp(0.4rem, 1vw, 0.6rem) clamp(1.5rem, 3vw, 3rem);
+  border-radius: 0 3rem 0 3rem;
+  display: inline-block;
+  width: fit-content;
+  transition: all 0.3s ease;
+}
+
+.hero-section .link-content:hover {
+  transform: scale(1.05);
+}
+
+.hero-section .link-content a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    min-height: auto;
+  }
+
+  .hero-content {
+    align-items: center;
+  }
+
+  .hero-section h1 {
+    font-size: clamp(4rem, 9vw, 8rem);
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .hero-section {
+    padding: clamp(1.5rem, 3vw, 2rem);
+    gap: 2rem;
+  }
+
+  .hero-section h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+  }
+}
