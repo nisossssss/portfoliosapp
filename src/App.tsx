@@ -20,7 +20,6 @@ function App() {
           <Hero />
         </main>
         <Resume />
-        <Resume />
       </div>
     </ThemeContext.Provider>
   )
