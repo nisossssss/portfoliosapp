@@ -14,9 +14,17 @@ function Header() {
 
     useEffect(() => {
         fetch('https://portfolios-spring-boot-app.onrender.com/api/user/name')
-            .then((response) => response.text())
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
             .then((data) => setUserName(data))
-            .catch((error) => console.error('Error fetching user name:', error));
+            .catch((error) => {
+                console.error('Error fetching user name:', error);
+                setUserName('Guest'); // Fallback name
+            });
     }, []);
     
     return (
