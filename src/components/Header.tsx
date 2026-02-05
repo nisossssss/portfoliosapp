@@ -14,7 +14,7 @@ function Header() {
 
     useEffect(() => {
         fetch('https://portfolios-spring-boot-app.onrender.com/api/user/name')
-            .then((response) => response.json())
+            .then((response) => response.text())
             .then((data) => setUserName(data))
             .catch((error) => console.error('Error fetching user name:', error));
     }, []);
