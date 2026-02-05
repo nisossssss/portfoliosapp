@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Symbol1 from '../assets/images/symbol-1.svg?react';
 import { useTheme } from '../contexts/ThemeContext';
 import './Header.css';
@@ -8,6 +8,16 @@ function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleMenu = () => setIsMenuOpen((open) => !open);
     const closeMenu = () => setIsMenuOpen(false);
+
+    const [userName, setUserName] = useState<string>('');
+
+
+    useEffect(() => {
+        fetch('https://portfolios-spring-boot-app.onrender.com/api/user/name')
+            .then((response) => response.json())
+            .then((data) => setUserName(data))
+            .catch((error) => console.error('Error fetching user name:', error));
+    }, []);
     
     return (
         <header style={{ backgroundColor, color: darkTextColor }}>
@@ -16,7 +26,7 @@ function Header() {
                     style={{ fill: accentColor }}
                     className="symbol-1"
                 />
-                <h1>Laura Argentieri</h1>
+                <h1>{userName}</h1>
             </div>
             <button
                 type="button"
