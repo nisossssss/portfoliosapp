@@ -11,18 +11,14 @@
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://portfolios-spring-boot-app.onrender.com';
 
-// Debug log per vedere quale URL viene usato
-console.log('API_BASE_URL:', API_BASE_URL);
-console.log('import.meta.env.VITE_API_BASE_URL:', import.meta.env.VITE_API_BASE_URL);
-
 export const getApiUrl = (endpoint: string): string => {
   return `${API_BASE_URL}${endpoint}`;
 };
 
 export const API_ENDPOINTS = {
   // Health Check
-  HEALTH: '/api/health',
-  PING: '/api/ping',
+  HEALTH: '/health',
+  PING: '/health/ping',
 
   // Authentication
   AUTH: {
@@ -74,8 +70,8 @@ export const API_ENDPOINTS = {
 export const API_CONFIG = {
   BASE_URL: API_BASE_URL,
   ENDPOINTS: {
-    HEALTH: '/api/health',
-    PING: '/api/ping',
+    HEALTH: '/health',
+    PING: '/health/ping',
     USERS: '/users',
     BLOGS: '/blogs',
     POSTS: '/posts',
