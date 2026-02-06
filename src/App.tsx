@@ -6,13 +6,16 @@ import Header from './components/Header';
 import Login from './components/Login';
 import PortfolioList from './components/PortfolioList';
 import PostDetail from './components/PostDetail';
+import ServerWaking from './components/ServerWaking';
 import UserPortfolio from './components/UserPortfolio';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
+import { useServerWake } from './hooks/useServerWake';
 
 function AppContent() {
   const { isAuthenticated, isLoading } = useAuth();
   const { colors } = useTheme();
+  const { isWaking } = useServerWake();
   const [currentPage, setCurrentPage] = useState<'home' | 'dashboard' | 'login'>('home');
   const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
   const [selectedBlogId, setSelectedBlogId] = useState<string | null>(null);
@@ -56,6 +59,11 @@ function AppContent() {
     setSelectedBlogId(null);
     setSelectedPostId(null);
   };
+
+  // Mostra overlay di risveglio server se in corso
+  if (isWaking) {
+    return <ServerWaking />;
+  }
 
   if (isLoading) {
     return (

@@ -16,6 +16,10 @@ export const getApiUrl = (endpoint: string): string => {
 };
 
 export const API_ENDPOINTS = {
+  // Health Check
+  HEALTH: '/api/health',
+  PING: '/api/ping',
+
   // Authentication
   AUTH: {
     LOGIN: '/auth/login',
@@ -66,6 +70,8 @@ export const API_ENDPOINTS = {
 export const API_CONFIG = {
   BASE_URL: API_BASE_URL,
   ENDPOINTS: {
+    HEALTH: '/api/health',
+    PING: '/api/ping',
     USERS: '/users',
     BLOGS: '/blogs',
     POSTS: '/posts',
