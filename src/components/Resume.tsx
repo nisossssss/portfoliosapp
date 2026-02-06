@@ -3,10 +3,10 @@ import './Resume.css';
 
  
 function Resume() {
-    const { accentColor } = useTheme();
+    const { colors } = useTheme();
 
     return (
-        <section id="resume" className="resume-section" style={{ backgroundColor: accentColor }}>
+        <section id="resume" className="resume-section" style={{ backgroundColor: colors.accentColor }}>
         </section>
     );
 }

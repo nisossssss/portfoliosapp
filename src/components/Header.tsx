@@ -1,40 +1,50 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Symbol1 from '../assets/images/symbol-1.svg?react';
+import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 import './Header.css';
+import ThemeSwitcher from './ThemeSwitcher';
 
-function Header() {
-    const { accentColor, backgroundColor, darkTextColor, lightTextColor } = useTheme();
+interface HeaderProps {
+  currentPage: 'home' | 'dashboard' | 'login';
+  onPageChange: (page: 'home' | 'dashboard' | 'login') => void;
+}
+
+function Header({ currentPage, onPageChange }: HeaderProps) {
+    const { colors } = useTheme();
+    const { logout, user, isAuthenticated } = useAuth();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const toggleMenu = () => setIsMenuOpen((open) => !open);
     const closeMenu = () => setIsMenuOpen(false);
 
-    const [userName, setUserName] = useState<string>('');
+    const displayName = user?.email || 'Portfolio App';
+    
+    const handleLogout = () => {
+        logout();
+        onPageChange('home');
+        closeMenu();
+    };
 
-
-    useEffect(() => {
-        fetch('https://portfolios-spring-boot-app.onrender.com/api/user/name')
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then((data) => setUserName(data))
-            .catch((error) => {
-                console.error('Error fetching user name:', error);
-                setUserName('Guest'); // Fallback name
-            });
-    }, []);
+    const handleNavigation = (page: 'home' | 'dashboard' | 'login') => {
+        onPageChange(page);
+        closeMenu();
+    };
     
     return (
-        <header style={{ backgroundColor, color: darkTextColor }}>
-            <div className="name-container">
-                <Symbol1
-                    style={{ fill: accentColor }}
-                    className="symbol-1"
-                />
-                <h1>{userName}</h1>
+        <>
+            <header style={{ backgroundColor: colors.backgroundColor, color: colors.darkTextColor }}>
+                <div className="name-container">
+                    <Symbol1
+                        style={{ fill: colors.accentColor }}
+                        className="symbol-1"
+                    />
+                    <button
+                        className="brand-button"
+                        onClick={() => handleNavigation('home')}
+                        style={{ color: colors.darkTextColor }}
+                    >
+                        <h1>{displayName}</h1>
+                    </button>
             </div>
             <button
                 type="button"
@@ -42,28 +52,89 @@ function Header() {
                 onClick={toggleMenu}
                 aria-expanded={isMenuOpen}
                 aria-controls="mobile-menu"
-                style={{ color: darkTextColor }}
+                style={{ color: colors.darkTextColor }}
             >
                 Menu
             </button>
             <nav className="header-links">
-                <a href="#about-me">About Me</a>
-                <a href="#blog">Blog</a>
-                <div className="link-container" style={{ backgroundColor: accentColor }}>
-                    <a href="#resume" style={{color: lightTextColor}}>My Resume!</a>
-                </div>
+                <button
+                    className={`nav-button ${currentPage === 'home' ? 'active' : ''}`}
+                    onClick={() => handleNavigation('home')}
+                    style={{ color: colors.darkTextColor }}
+                >
+                    Home
+                </button>
+                {isAuthenticated && (
+                    <button
+                        className={`nav-button ${currentPage === 'dashboard' ? 'active' : ''}`}
+                        onClick={() => handleNavigation('dashboard')}
+                        style={{ color: colors.darkTextColor }}
+                    >
+                        Dashboard
+                    </button>
+                )}
+                {!isAuthenticated && (
+                    <button
+                        className="nav-button"
+                        onClick={() => handleNavigation('login')}
+                        style={{ color: colors.darkTextColor }}
+                    >
+                        Accedi
+                    </button>
+                )}
+                <ThemeSwitcher />
+                {isAuthenticated && (
+                    <button 
+                        className="logout-button"
+                        onClick={handleLogout}
+                        style={{ backgroundColor: colors.accentColor, color: colors.lightTextColor }}
+                    >
+                        Logout
+                    </button>
+                )}
             </nav>
             <nav
                 id="mobile-menu"
                 className={`header-links mobile-menu ${isMenuOpen ? 'open' : ''}`}
             >
-                <a href="#about-me" onClick={closeMenu}>About Me</a>
-                <a href="#blog" onClick={closeMenu}>Blog</a>
-                <div className="link-container" style={{ backgroundColor: accentColor }}>
-                    <a href="#resume" style={{color: lightTextColor}} onClick={closeMenu}>My Resume!</a>
-                </div>
+                <button
+                    className={`nav-button mobile ${currentPage === 'home' ? 'active' : ''}`}
+                    onClick={() => handleNavigation('home')}
+                    style={{ color: colors.darkTextColor }}
+                >
+                    Home
+                </button>
+                {isAuthenticated && (
+                    <button
+                        className={`nav-button mobile ${currentPage === 'dashboard' ? 'active' : ''}`}
+                        onClick={() => handleNavigation('dashboard')}
+                        style={{ color: colors.darkTextColor }}
+                    >
+                        Dashboard
+                    </button>
+                )}
+                {!isAuthenticated && (
+                    <button
+                        className="nav-button mobile"
+                        onClick={() => handleNavigation('login')}
+                        style={{ color: colors.darkTextColor }}
+                    >
+                        Accedi
+                    </button>
+                )}
+                <ThemeSwitcher />
+                {isAuthenticated && (
+                    <button 
+                        className="logout-button logout-button-mobile"
+                        onClick={handleLogout}
+                        style={{ backgroundColor: colors.accentColor, color: colors.lightTextColor }}
+                    >
+                        Logout
+                    </button>
+                )}
             </nav>
         </header>
+        </>
     )
 }
 

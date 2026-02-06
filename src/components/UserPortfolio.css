@@ -1,0 +1,336 @@
+.user-portfolio-page {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.back-button-portfolio {
+  background: transparent;
+  border: 2px solid var(--accent-color, #6F1110);
+  color: var(--accent-color, #6F1110);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin: 2rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.back-button-portfolio:hover {
+  background: var(--accent-color, #6F1110);
+  color: white;
+}
+
+/* Resume Section Styling */
+.resume-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  position: relative;
+}
+
+.resume-container::before {
+  content: 'RESUME';
+  position: absolute;
+  font-size: 15rem;
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.05);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.resume-column {
+  position: relative;
+  z-index: 1;
+}
+
+.resume-column h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+.resume-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.resume-icon {
+  font-size: 1.5rem;
+  margin-top: 0.2rem;
+}
+
+.resume-item h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.resume-item p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.experience-box {
+  padding: 2rem;
+  border-radius: 12px;
+  margin-top: 3rem;
+}
+
+.experience-box h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.experience-box p {
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.languages-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.language-item h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.language-item p {
+  font-size: 0.95rem;
+}
+
+.interests-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.interests-grid span {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* My Blog Section */
+.my-blog-section {
+  padding: 6rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.my-blog-section::before {
+  content: 'MYBLOG';
+  position: absolute;
+  font-size: 12rem;
+  font-weight: 900;
+  color: rgba(27, 23, 23, 0.03);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.blog-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+.blog-main-title {
+  font-size: 5rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  font-family: 'Courier New', monospace;
+}
+
+.blog-subtitle {
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+.blog-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.blog-post-card {
+  border: 3px solid var(--dark-text-color, #1B1717);
+  border-radius: 12px;
+  padding: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: var(--background-color, #EDEBDD);
+}
+
+.blog-post-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 8px 8px 0 var(--accent-color, #6F1110);
+}
+
+.blog-card-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.blog-card-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.blog-card-tags {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.blog-tag {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* User Section (previously user-header) */
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--dark-text-color, #1B1717);
+}
+
+.no-content {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+  font-style: italic;
+}
+
+.blogs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.blog-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.blog-title {
+  font-size: 1.5rem;
+  margin: 0 0 1rem 0;
+  color: var(--dark-text-color, #1B1717);
+}
+
+.blog-description {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.blog-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--accent-color, #6F1110);
+}
+
+.blog-posts-count {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.blog-view-btn {
+  background: var(--accent-color, #6F1110);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.blog-view-btn:hover {
+  background: #8a1513;
+}
+
+.error {
+  color: #d32f2f;
+  text-align: center;
+  padding: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .resume-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .resume-container::before {
+    font-size: 8rem;
+  }
+
+  .blog-main-title {
+    font-size: 3.5rem;
+  }
+
+  .blog-cards-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .blog-main-title {
+    font-size: 2.5rem;
+  }
+
+  .blog-subtitle {
+    font-size: 1.3rem;
+  }
+
+  .resume-column h2 {
+    font-size: 2rem;
+  }
+
+  .my-blog-section::before {
+    font-size: 6rem;
+  }
+}

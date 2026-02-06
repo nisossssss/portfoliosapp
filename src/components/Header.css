@@ -80,6 +80,102 @@ header {
   transform: scale(1.05);
 }
 
+.brand-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  cursor: pointer;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  transition: opacity 0.3s ease;
+}
+
+.brand-button:hover {
+  opacity: 0.8;
+}
+
+.brand-button h1 {
+  font-size: clamp(1.2rem, 4vw, 2.5rem);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  margin: 0;
+  font-family: inherit;
+  font-size: clamp(0.85rem, 2vw, 1.3rem);
+  color: inherit;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  white-space: nowrap;
+  position: relative;
+}
+
+.nav-button:hover {
+  opacity: 0.7;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.nav-button.active {
+  font-weight: 600;
+}
+
+.nav-button.active::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 1.2rem;
+  right: 1.2rem;
+  height: 3px;
+  background-color: currentColor;
+  border-radius: 2px;
+}
+
+.nav-button.mobile {
+  width: 100%;
+  text-align: left;
+  padding: 0.8rem 0;
+  border-radius: 0;
+  border-bottom: 1px solid var(--accent-color, #6F1110);
+}
+
+.nav-button.mobile:hover {
+  background-color: transparent;
+  opacity: 0.6;
+}
+
+.logout-button {
+  border: none;
+  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  font-size: clamp(0.85rem, 2vw, 1.3rem);
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.logout-button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.logout-button:active {
+  transform: scale(0.98);
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   header {
@@ -165,6 +261,13 @@ header {
   .link-container {
     padding: 0.4rem 1.2rem;
     margin: 0;
+  }
+
+  .logout-button-mobile {
+    width: 100%;
+    text-align: center;
+    margin-top: 0.5rem;
+    padding: 0.6rem 1rem;
   }
 
   .symbol-1 {

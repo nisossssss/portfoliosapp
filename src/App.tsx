@@ -1,28 +1,146 @@
+import { useEffect, useState } from 'react';
 import './App.css';
+import BlogDetail from './components/BlogDetail';
+import Dashboard from './components/Dashboard';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import Resume from './components/Resume';
-import ThemeContext from './contexts/ThemeContext';
+import Login from './components/Login';
+import PortfolioList from './components/PortfolioList';
+import PostDetail from './components/PostDetail';
+import UserPortfolio from './components/UserPortfolio';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import { ThemeProvider, useTheme } from './contexts/ThemeContext';
 
-const themeColors = {
-  accentColor: "#6F1110",
-  backgroundColor: "#EDEBDD",
-  darkTextColor: "#1B1717",
-  lightTextColor: "#EDEBDD"
-};
+function AppContent() {
+  const { isAuthenticated, isLoading } = useAuth();
+  const { colors } = useTheme();
+  const [currentPage, setCurrentPage] = useState<'home' | 'dashboard' | 'login'>('home');
+  const [selectedUserId, setSelectedUserId] = useState<number | null>(null);
+  const [selectedBlogId, setSelectedBlogId] = useState<string | null>(null);
+  const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Se autenticato e prova ad andare su login, vai alla dashboard
+    if (isAuthenticated && currentPage === 'login') {
+      setCurrentPage('dashboard');
+    }
+    // Se non autenticato e prova ad andare su dashboard, vai alla login
+    if (!isAuthenticated && currentPage === 'dashboard') {
+      setCurrentPage('login');
+    }
+  }, [isAuthenticated, currentPage]);
+
+  const handleSelectUser = (userId: number) => {
+    setSelectedUserId(userId);
+  };
+
+  const handleSelectBlog = (blogId: string) => {
+    setSelectedBlogId(blogId);
+    setSelectedPostId(null);
+  };
+
+  const handleSelectPost = (postId: string) => {
+    setSelectedPostId(postId);
+  };
+
+  const handleBackFromPost = () => {
+    setSelectedPostId(null);
+  };
+
+  const handleBackFromBlog = () => {
+    setSelectedBlogId(null);
+    setSelectedPostId(null);
+  };
+
+  const handleBackFromUser = () => {
+    setSelectedUserId(null);
+    setSelectedBlogId(null);
+    setSelectedPostId(null);
+  };
+
+  if (isLoading) {
+    return (
+      <div className="app-container" style={{ 
+        backgroundColor: colors.backgroundColor, 
+        color: colors.darkTextColor,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh'
+      }}>
+        <p>Caricamento...</p>
+      </div>
+    );
+  }
+
+  // Mostra pagina login senza header
+  if (currentPage === 'login' && !isAuthenticated) {
+    return (
+      <div className="app-container" style={{ backgroundColor: colors.backgroundColor }}>
+        <Login onBackToHome={() => setCurrentPage('home')} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="app-container" style={{ backgroundColor: colors.backgroundColor, color: colors.darkTextColor }}>
+      <Header currentPage={currentPage} onPageChange={(page) => {
+        setCurrentPage(page);
+        setSelectedUserId(null);
+        setSelectedBlogId(null);
+        setSelectedPostId(null);
+      }} />
+      
+      <main>
+        {currentPage === 'home' && (
+          <>
+            {selectedPostId ? (
+              <PostDetail postId={selectedPostId} onBack={handleBackFromPost} />
+            ) : selectedBlogId ? (
+              <BlogDetail blogId={selectedBlogId} onBack={handleBackFromBlog} onSelectPost={handleSelectPost} />
+            ) : selectedUserId ? (
+              <UserPortfolio userId={selectedUserId} onBack={handleBackFromUser} onSelectBlog={handleSelectBlog} />
+            ) : (
+              <PortfolioList onSelectUser={handleSelectUser} onLoginClick={() => setCurrentPage('login')} />
+            )}
+          </>
+        )}
+        {currentPage === 'dashboard' && isAuthenticated && <Dashboard />}
+      </main>
+    </div>
+  );
+}
+
+function AppWithTheme() {
+  const { user, isLoading: authLoading } = useAuth();
+  
+  // Don't render ThemeProvider until auth is loaded
+  if (authLoading) {
+    return (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        backgroundColor: '#f5f5f5'
+      }}>
+        <p>Caricamento...</p>
+      </div>
+    );
+  }
+
+  return (
+    <ThemeProvider userId={user ? parseInt(user.id) : null}>
+      <AppContent />
+    </ThemeProvider>
+  );
+}
 
 function App() {
   return (
-    <ThemeContext.Provider value={themeColors}>
-      <div className="app-container" style={{ backgroundColor: themeColors.backgroundColor, color: themeColors.darkTextColor }}>
-        <Header />
-        <main>
-          <Hero />
-        </main>
-        <Resume />
-      </div>
-    </ThemeContext.Provider>
-  )
+    <AuthProvider>
+      <AppWithTheme />
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;

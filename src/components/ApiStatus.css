@@ -1,0 +1,128 @@
+.api-status {
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px;
+  font-family: monospace;
+  font-size: 12px;
+  background-color: #f5f5f5;
+  border-left: 4px solid;
+}
+
+.api-status-connected {
+  border-left-color: #4caf50;
+  background-color: #f0f8f0;
+}
+
+.api-status-disconnected {
+  border-left-color: #f44336;
+  background-color: #fef0f0;
+}
+
+.api-status-testing {
+  border-left-color: #ff9800;
+  background-color: #fff8f0;
+}
+
+.api-status-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--accent-color, #6F1110);
+}
+
+.api-status-header h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.refresh-btn {
+  padding: 4px 12px;
+  border: 1px solid var(--accent-color, #6F1110);
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  font-size: 11px;
+  transition: all 0.2s;
+}
+
+.refresh-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.api-status-message {
+  margin: 0 0 15px 0;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.endpoints-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.endpoint-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.endpoint-ok {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #2e7d32;
+}
+
+.endpoint-error {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #c62828;
+}
+
+.endpoint-pending {
+  background-color: rgba(255, 152, 0, 0.1);
+  color: #e65100;
+}
+
+.endpoint-icon {
+  font-weight: bold;
+  font-size: 14px;
+  min-width: 20px;
+}
+
+.endpoint-name {
+  flex: 1;
+  font-weight: bold;
+}
+
+.endpoint-message {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.api-status-footer {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.timestamp {
+  margin: 0 0 10px 0;
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+.debug-info {
+  margin: 0;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  font-size: 10px;
+  line-height: 1.4;
+}
