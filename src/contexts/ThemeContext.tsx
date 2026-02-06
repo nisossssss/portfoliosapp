@@ -63,7 +63,9 @@ export const ThemeProvider = ({ children, userId }: ThemeProviderProps) => {
                 // If user is authenticated, try to load from backend
                 if (userId) {
                     try {
-                        const response = await fetch(`/api/users/${userId}/theme-preference`);
+                        const response = await fetch(`/api/users/${userId}/theme-preference`, {
+                            credentials: 'include',
+                        });
                         if (response.ok) {
                             const data = await response.json();
                             if (data.themeId) {
@@ -105,6 +107,7 @@ export const ThemeProvider = ({ children, userId }: ThemeProviderProps) => {
                         headers: {
                             'Content-Type': 'application/json',
                         },
+                        credentials: 'include',
                         body: JSON.stringify({ themeId }),
                     });
                 } catch (error) {
@@ -130,6 +133,7 @@ export const ThemeProvider = ({ children, userId }: ThemeProviderProps) => {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
+                    credentials: 'include',
                     },
                     body: JSON.stringify({ themeId: 'custom', customColors: colors }),
                 });

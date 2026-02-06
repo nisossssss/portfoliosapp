@@ -32,6 +32,7 @@ export function useServerWake(): ServerWakeStatus {
           {
             signal: controller.signal,
             method: 'GET',
+            credentials: 'include',
           }
         );
 

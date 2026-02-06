@@ -39,6 +39,7 @@ export function useBackendApi<T = string>({
       try {
         const response = await fetch(url, {
           signal: controller.signal,
+          credentials: 'include',
         });
 
         clearTimeout(wakingUpTimer);
